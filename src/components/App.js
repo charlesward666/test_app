@@ -8,7 +8,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
@@ -30,19 +29,15 @@ const styles = theme => ({
 
 const fieldParams = ['Twin', 'Tripple', 'Quadro']
 
-
-
 class DialogSelect extends Component {
 
   state = {
     open: false,
     items: [{
-      selectNumber: 0,
-      numberField: 0
+      selectNumber: 0
     }],
     saveLetters: []
   };
-
 
   handleChangeItem = name => event => {
     const items = [...this.state.items]
@@ -52,7 +47,7 @@ class DialogSelect extends Component {
 
   addField = () => {
     const items = [...this.state.items]
-    items.push({selectNumber: 0, numberField: 0})
+    items.push({selectNumber: 0})
     this.setState({
       items: items
     })
@@ -66,15 +61,11 @@ class DialogSelect extends Component {
     })
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
   save = () => {
     const items = [...this.state.items]
     this.setState({
       saveLetters: [...items],
-      items: [{selectNumber: 0, SelectField: 0}],
+      items: [{selectNumber: 0}],
       open: false
     })
   }
@@ -106,10 +97,8 @@ class DialogSelect extends Component {
             {this.state.items.map((item, index) => 
               <FormControl className={classes.formControl} key={index}>
                 <Select
-                  name={`items.${index}.selectNumbe`}
                   value={item.selectNumber}
                   onChange={this.handleChangeItem(index)}
-                  input={<Input id={`some${index}`} name={`items.${index}.selectNumbe`} />}
                 >
                   {fieldParams.map((itemParam, index) => 
                       <MenuItem value={index} key={index}>{itemParam}</MenuItem>
